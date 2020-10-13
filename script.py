@@ -14,8 +14,22 @@ while True:
 		break
 	input_list.append(string)
 
-def id_generator(size=6, chars=upper_letters+lower_letters+digits+input_list):
-    return ''.join(random.choice(chars) for i in range(size))
+def id_generator(size=6, chars=upper_letters+lower_letters+digits):
+	global input_list
+	password = []
+	while size:
+		stat = random.randint(0, 200)
+		if stat % 3 == 0:
+			string = random.choice(input_list)
+			if not string in password:
+				password.append(string)
+				size-=1
+				continue
+
+		password.append(random.choice(chars))
+		size-=1
+							
+	return ''.join(password)
 
 
 print(id_generator(size=total_len))	
